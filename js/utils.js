@@ -14,7 +14,8 @@ function createMat(size) {
       gAvailablePos.push({ i: i, j: j });
     }
   }
-
+  // board[0][0].isMine = true;
+  // board[3][3].isMine = true;
   return board;
 }
 
@@ -62,45 +63,6 @@ function getRandomColor() {
   return color;
 }
 
-function getGhost(location) {
-  if (gBoard[location.i][location.j] !== GHOST) return;
-  for (var i = 0; i < gGhosts.length; i++) {
-    if (gGhosts[i].location.i === location.i && gGhosts[i].location.j === location.j)
-      return gGhosts[i];
-  }
-  return null;
-}
-
-function removeGhostsDom(ghosts) {
-  for (var i = 0; i < ghosts.length; i++) {
-    renderCell(ghosts[i].location, FOOD);
-  }
-}
-
-function getEmptyPos() {
-  var res = [];
-  for (var i = 0; i < gBoard.length; i++) {
-    for (var j = 0; j < gBoard[0].length; j++) {
-      if (gBoard[i][j] === " ")
-        res.push({
-          i: i,
-          j: j,
-        });
-    }
-  }
-  if (res.length) return res[getRandomInt(0, res.length - 1)];
-  return null;
-}
-
-function addCherry() {
-  var location = getEmptyPos();
-  if (!location) return;
-  // model
-  gBoard[location.i][location.j] = CHERRY;
-  // DOM
-  renderCell(location, CHERRY);
-}
-
 function countNegs(mat, rowIdx, colIdx) {
   var count = 0;
   for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
@@ -131,4 +93,29 @@ function getCountPrimaryDiagonal(symbol) {
     if (currCell === symbol) count++;
   }
   return count;
+}
+var elLives = document.querySelector(".lives");
+function easyMode() {
+  gLevel.SIZE = 4;
+  gLevel.MINES = 2;
+  gLevel.LIVES = 1;
+  elLives.innerHTML = "💖";
+  init();
+}
+
+function mediumMode() {
+  gLevel.SIZE = 8;
+  gLevel.MINES = 12;
+  gLevel.LIVES = 2;
+  elLives.innerHTML = "💖💖";
+
+  init();
+}
+
+function hardMode() {
+  gLevel.SIZE = 12;
+  gLevel.MINES = 30;
+  gLevel.LIVES = 3;
+  elLives.innerHTML = "💖💖💖";
+  init();
 }

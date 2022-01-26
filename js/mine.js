@@ -14,7 +14,7 @@ function setRandMines(board) {
   var minesPos = [];
   for (var c = 0; c < gLevel.MINES; c++) {
     var randIdx = getRandomInt(0, gAvailablePos.length - 1);
-    var pos = gAvailablePos.splice(gAvailablePos.indexOf(randIdx), 1)[0];
+    var pos = gAvailablePos.splice(randIdx, 1)[0];
     board[pos.i][pos.j].isMine = true;
     minesPos.push(pos);
   }
