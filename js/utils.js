@@ -11,11 +11,9 @@ function createMat(size) {
         isMine: false,
         isMarked: false,
       };
-      gAvailablePos.push({ i: i, j: j });
     }
   }
-  // board[0][0].isMine = true;
-  // board[3][3].isMine = true;
+
   return board;
 }
 
@@ -33,7 +31,7 @@ function rendMat(mat) {
 
       if (cell.minesAroundCount !== 0) cellContent = cell.minesAroundCount;
 
-      strHTML += `<td class="${className}"  onmousedown="cellClicked(this, event, ${i}, ${j})"></td>`;
+      strHTML += `<td class="${className}" onclick="userMines(this, ${i}, ${j})" onmousedown="cellClicked(this, event, ${i}, ${j})"></td>`;
     }
     strHTML += "</tr>";
   }
@@ -46,7 +44,7 @@ function rendMat(mat) {
 function renderCell(location, value) {
   // Select the elCell and set the value
   var elCell = document.querySelector(`.cell-${location.i}-${location.j}`);
-  console.log(elCell);
+  // console.log(elCell);
   elCell.innerHTML = value;
 }
 
@@ -63,6 +61,7 @@ function getRandomColor() {
   return color;
 }
 
+//count negs with mine
 function countNegs(mat, rowIdx, colIdx) {
   var count = 0;
   for (var i = rowIdx - 1; i <= rowIdx + 1; i++) {
@@ -95,27 +94,40 @@ function getCountPrimaryDiagonal(symbol) {
   return count;
 }
 var elLives = document.querySelector(".lives");
+
 function easyMode() {
   gLevel.SIZE = 4;
   gLevel.MINES = 2;
-  gLevel.LIVES = 1;
-  elLives.innerHTML = "💖";
   init();
 }
 
 function mediumMode() {
   gLevel.SIZE = 8;
   gLevel.MINES = 12;
-  gLevel.LIVES = 2;
-  elLives.innerHTML = "💖💖";
-
   init();
 }
 
 function hardMode() {
   gLevel.SIZE = 12;
   gLevel.MINES = 30;
-  gLevel.LIVES = 3;
-  elLives.innerHTML = "💖💖💖";
   init();
+}
+
+// display best scores in reset
+function printScores() {
+  var elEasy = document.querySelector(".easy");
+  var innerText = localStorage.getItem("easy") ? localStorage.getItem("easy") : 0;
+  elEasy.innerText = innerText;
+
+  var elMedium = document.querySelector(".medium");
+  innerText = localStorage.getItem("medium") ? localStorage.getItem("medium") : 0;
+  elMedium.innerText = innerText;
+
+  var elHard = document.querySelector(".hard");
+  innerText = localStorage.getItem("hard") ? localStorage.getItem("hard") : 0;
+  elHard.innerText = innerText;
+}
+function runTime() {
+  timeEl.innerText = (++gTimer / 10).toFixed(1);
+  // console.log(gTimer);
 }

@@ -22,7 +22,6 @@ p {
   padding: 10px;
   border: 3px solid rgb(245, 60, 137);
   width: 500px;
-  height: 600px;
   margin: 100px auto 0;
   border-radius: 10px;
   box-shadow: 5px 8px 34px 7px rgba(158, 76, 137, 0.7);
@@ -32,6 +31,8 @@ p {
   width: 40px;
   height: 40px;
   border: 1px solid rgba(145, 10, 133, 0.979);
+  cursor: pointer;
+  /* transition: 0.5s; */
 }
 
 .clicked {
@@ -39,13 +40,25 @@ p {
   box-shadow: -1px 3px 34px -7px rgba(158, 43, 109, 0.7);
 }
 
+.revealed {
+  background-color: #a146a1;
+  box-shadow: -1px 3px 34px -7px rgba(158, 43, 109, 0.7);
+}
+
 table {
   margin: auto;
 }
 
-.game-timer,
+.hints div {
+  display: inline-block;
+}
+
+.hint {
+  cursor: pointer;
+}
 .game-condition {
   display: inline-block;
+  cursor: pointer;
 }
 
 /* CSS */
@@ -57,8 +70,20 @@ button {
   height: 50px;
   letter-spacing: 3px;
   margin-right: 15px;
+  color: white;
+  cursor: pointer;
 }
 
-button p {
-  color: white;
+button:hover {
+  color: black;
+  background-color: lightpink;
+  box-shadow: -1px 3px 34px -7px rgba(158, 43, 109, 0.7);
+}
+
+.best-time div {
+  display: inline-block;
+  border: 1px solid black;
+}
+
+.game-timer {
 }
