@@ -45,14 +45,14 @@ function findAvailablPos(board) {
   return positions;
 }
 
+// DOESNT WORK YET
 function userMines(elCell, i, j) {
   if (!gIsMineByUser) return;
   if (gUserMinesCount === gLevel.MINES) {
     gIsMineByUser = false;
     return;
   }
-  // gGame.isOn = false;
-  console.log("hi");
+
   var currCell = gBoard[i][j];
   currCell.isMine = true;
   elCell.classList.add("revealed");

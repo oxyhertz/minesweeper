@@ -7,10 +7,9 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Sora:wght@500&display=swap" rel="stylesheet">
     <title>Mine sweeper</title>
   </head>
   <body onload="init()">
@@ -36,7 +35,7 @@
           <div class="hint" onclick="useHint(this)">💡</div>
           <div class="hint" onclick="useHint(this)">💡</div>
         </div>
-        <div>⏰ <span class="game-timer"> 0</span></div>
+        <div class="timer">⏰ <span class="game-timer"> 0</span></div>
         <div class="game-condition" onclick="init()">😊</div>
         <div>Lives left:<span class="lives">3</span></div>
         <table>

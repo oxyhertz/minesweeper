@@ -17,7 +17,7 @@ var bestTimes = {
 var gUserMinesCount;
 var gIsMineByUser;
 var gIsRecOn;
-var gIsFirstClick = false;
+var gIsFirstClick;
 var gTimer;
 var gAvailablePos;
 var gBoard;
@@ -128,7 +128,6 @@ function cellClicked(elCell, event, i, j) {
       if (!currCell.minesAroundCount && !currCell.isMine) {
         gGame.shownCount++;
         checkWin();
-        // debugger;
         expandShown(gBoard, i, j);
       }
       // if curcell have mine negs
@@ -174,23 +173,17 @@ function cellMarked(elCell, currCell) {
   if (currCell.isMarked) {
     currCell.isMarked = false;
     elCell.innerText = EMPTY;
-    gGame.markedCount--;
+    if (currCell.isMine) gGame.markedCount--;
+    console.log(gGame.markedCount);
+
     checkWin();
   } else {
     // mark
     currCell.isMarked = true;
     elCell.innerText = FLAG;
-    gGame.markedCount++;
+    if (currCell.isMine) gGame.markedCount++;
+    console.log(gGame.markedCount);
     checkWin();
-  }
-}
-
-function checkWin() {
-  if (gGame.markedCount + gGame.shownCount === gLevel.SIZE ** 2) {
-    gameStops();
-    elEmoji.innerText = WIN;
-    console.log("WIN!");
-    checkBestScore();
   }
 }
 

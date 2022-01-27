@@ -11,7 +11,6 @@ function safeClick() {
     var randJ = getRandomInt(0, gBoard.length - 1);
     var randCell = gBoard[randI][randJ];
     var elRandCell = document.querySelector(`.cell-${randI}-${randJ}`);
-    console.log("while running");
     if (!randCell.isMine && !randCell.isShown) {
       var negs = randCell.minesAroundCount ? randCell.minesAroundCount : "";
       elRandCell.classList.add("revealed");

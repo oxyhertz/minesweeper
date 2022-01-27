@@ -23,14 +23,8 @@ function rendMat(mat) {
     strHTML += "<tr>";
     for (var j = 0; j < mat[0].length; j++) {
       var cell = mat[i][j];
-      var cellContent = "";
-      if (cell.isMine) cellContent = MINE;
 
-      // var className = "cell cell-" + i + "-" + j;
       var className = `cell cell-${i}-${j}`;
-
-      if (cell.minesAroundCount !== 0) cellContent = cell.minesAroundCount;
-
       strHTML += `<td class="${className}" onclick="userMines(this, ${i}, ${j})" onmousedown="cellClicked(this, event, ${i}, ${j})"></td>`;
     }
     strHTML += "</tr>";
@@ -44,7 +38,6 @@ function rendMat(mat) {
 function renderCell(location, value) {
   // Select the elCell and set the value
   var elCell = document.querySelector(`.cell-${location.i}-${location.j}`);
-  // console.log(elCell);
   elCell.innerHTML = value;
 }
 
@@ -76,23 +69,6 @@ function countNegs(mat, rowIdx, colIdx) {
   return count;
 }
 
-function getCountSecondaryDiagonal(symbol) {
-  var count = 0;
-  for (var i = 0; i < gBoard.length; i++) {
-    var currCell = gBoard[i][gBoard.length - i - 1];
-    if (currCell === symbol) count++;
-  }
-  return count;
-}
-
-function getCountPrimaryDiagonal(symbol) {
-  var count = 0;
-  for (var i = 0; i < gBoard.length; i++) {
-    var currCell = gBoard[i][i];
-    if (currCell === symbol) count++;
-  }
-  return count;
-}
 var elLives = document.querySelector(".lives");
 
 function easyMode() {
@@ -130,4 +106,13 @@ function printScores() {
 function runTime() {
   timeEl.innerText = (++gTimer / 10).toFixed(1);
   // console.log(gTimer);
+}
+
+function checkWin() {
+  if (gGame.markedCount + gGame.shownCount === gLevel.SIZE ** 2) {
+    gameStops();
+    elEmoji.innerText = WIN;
+    console.log("WIN!");
+    checkBestScore();
+  }
 }
