@@ -83,7 +83,6 @@ function cellClicked(elCell, event, i, j) {
   if (!event.button) {
     if (currCell.isMarked) return;
     if (gIsMineByUser) {
-      console.log("Clicked");
       userMines(elCell, i, j);
       return;
     }
@@ -156,7 +155,6 @@ function cellClicked(elCell, event, i, j) {
     cellMarked(elCell, currCell);
     addAction(i, j);
   }
-  console.log(gGame.shownCount);
 }
 
 function expandShown(board, possI, possJ) {
@@ -193,7 +191,6 @@ function cellMarked(elCell, currCell) {
     currCell.isMarked = false;
     elCell.innerText = EMPTY;
     if (currCell.isMine) gGame.markedCount--;
-    console.log(gGame.markedCount);
 
     checkWin();
   } else {
@@ -201,7 +198,6 @@ function cellMarked(elCell, currCell) {
     currCell.isMarked = true;
     elCell.innerHTML = FLAG;
     if (currCell.isMine) gGame.markedCount++;
-    console.log(gGame.markedCount);
     checkWin();
   }
 }
