@@ -7,46 +7,80 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Sora:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Sora:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <title>Mine sweeper</title>
   </head>
   <body onload="init()">
     <div class="container">
       <h1>Minesweeper💣</h1>
-      <button class="mode" onclick="easyMode()">
-        <p>Easy Mode</p>
-      </button>
-      <button class="mode" onclick="mediumMode()"><p>Medium Mode</p></button>
-      <button class="mode" onclick="hardMode()"><p>Hard Mode</p></button>
+      <div class="modes">
+        <button class="mode" onclick="easyMode()">
+          <p>Easy</p>
+        </button>
+        <button class="mode" onclick="mediumMode()"><p>Medium</p></button>
+        <button class="mode" onclick="hardMode()"><p>Hard</p></button>
+      </div>
+
+      <div class="wrap" oncontextmenu="return false;">
+
+        <div class="left-content">
+          <div class="safe-click">
+            <button onclick="safeClick()">SAFE CLICK 🖱️</button>
+            <p><span class="clicks-left">3</span> Clicks Available</p>
+          </div>
+          <div class="set-mines">
+            <button class="user-mines" onclick="minesByUser()">Set Mines Manually</button>
+            <p class="user-mines-left"></p>
+          </div>
+          <div class="seven-boom">
+            <button onclick="setMinesBy7()">7BOOM Mode</button>
+            <h4></h4>
+          </div>
+          <div class="hints">
+            <span class="hint" onclick="useHint(this)">💡</span>
+            <span class="hint" onclick="useHint(this)">💡</span>
+            <span class="hint" onclick="useHint(this)">💡</span>
+          </div>
+        </div>
+        <div class="app">
+          <thead>
+            <tr>
+              <div class="stats-bar">
+              <th><div class="timer"><img src="images/clock.png" width="45px" height="45px"> <span class="game-timer"></span></div></th>
+              <th><div class="game-condition" onclick="init()">😊</div></th>
+              <th><div class="lives"></div></th>
+            </div>
+            </tr>
+          
+          <table>
+            <tbody class="board"></tbody>
+          </table>
+        </div>
+        <div class="right-content">
+          <div class="undo">
+            <button onclick="undoCell()">undo ↩️</button>
+          </div>
+
+        </div>
+      </div>
       <div class="best-time">
         <h2>BEST TIMES!</h1>
         <div>Easy Best Score: <span class="easy"></span></div>
         <div>Medium Best Score: <span class="medium"></span></div>
         <div>Hard Best Score: <span class="hard"></span></div>
       </div>
-      <button class="safe-click" onclick="safeClick()">SAFE CLICK 🖱️</button>
-      <p><span class="clicks-left">3</span> Clicks Available</p>
-      <div class="app" oncontextmenu="return false;">
-        <div class="hints">
-          USE HINT:
-          <div class="hint" onclick="useHint(this)">💡</div>
-          <div class="hint" onclick="useHint(this)">💡</div>
-          <div class="hint" onclick="useHint(this)">💡</div>
-        </div>
-        <div class="timer">⏰ <span class="game-timer"> 0</span></div>
-        <div class="game-condition" onclick="init()">😊</div>
-        <div>Lives left:<span class="lives">3</span></div>
-        <table>
-          <tbody class="board"></tbody>
-        </table>
-      </div>
     </div>
     <script src="js/utils.js"></script>
     <script src="js/mine.js"></script>
     <script src="js/hint.js"></script>
     <script src="js/safeClick.js"></script>
+    <script src="js/undo.js"></script>
+    <script src="js/sevenBoom.js"></script>
     <script src="js/game.js"></script>
   </body>
 </html>

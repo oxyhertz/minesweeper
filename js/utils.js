@@ -25,7 +25,7 @@ function rendMat(mat) {
       var cell = mat[i][j];
 
       var className = `cell cell-${i}-${j}`;
-      strHTML += `<td class="${className}" onclick="userMines(this, ${i}, ${j})" onmousedown="cellClicked(this, event, ${i}, ${j})"></td>`;
+      strHTML += `<td class="${className}" onmousedown="cellClicked(this, event, ${i}, ${j})"></td>`;
     }
     strHTML += "</tr>";
   }
@@ -92,27 +92,43 @@ function hardMode() {
 // display best scores in reset
 function printScores() {
   var elEasy = document.querySelector(".easy");
-  var innerText = localStorage.getItem("easy") ? localStorage.getItem("easy") : 0;
+  var innerText = localStorage.getItem("easy") ? localStorage.getItem("easy") : "  ";
   elEasy.innerText = innerText;
 
   var elMedium = document.querySelector(".medium");
-  innerText = localStorage.getItem("medium") ? localStorage.getItem("medium") : 0;
+  innerText = localStorage.getItem("medium") ? localStorage.getItem("medium") : "  ";
   elMedium.innerText = innerText;
 
   var elHard = document.querySelector(".hard");
-  innerText = localStorage.getItem("hard") ? localStorage.getItem("hard") : 0;
+  innerText = localStorage.getItem("hard") ? localStorage.getItem("hard") : " ";
   elHard.innerText = innerText;
 }
 function runTime() {
   timeEl.innerText = (++gTimer / 10).toFixed(1);
-  // console.log(gTimer);
 }
 
 function checkWin() {
   if (gGame.markedCount + gGame.shownCount === gLevel.SIZE ** 2) {
     gameStops();
-    elEmoji.innerText = WIN;
+    elEmoji.innerHTML = WIN;
     console.log("WIN!");
     checkBestScore();
   }
+}
+
+function runTimer() {
+  if (!gTimer) {
+    gTimeInterval = setInterval(runTime, 100);
+  }
+}
+
+function renderLives() {
+  var str = "";
+  var elLives = document.querySelector(".lives");
+  for (var i = 0; i < gLevel.LIVES; i++) {
+    str += `<img src="images/hear2.png" width="45px" height="45px">`;
+  }
+  elLives.innerHTML = str;
+
+  return str;
 }

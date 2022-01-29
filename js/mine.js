@@ -1,5 +1,6 @@
 const MINE = "💣";
 var gMinesPos = [];
+var gIsUserPlay;
 function setMinesNegsCount() {
   for (var i = 0; i < gBoard.length; i++) {
     for (var j = 0; j < gBoard[0].length; j++) {
@@ -45,14 +46,9 @@ function findAvailablPos(board) {
   return positions;
 }
 
-// DOESNT WORK YET
 function userMines(elCell, i, j) {
   if (!gIsMineByUser) return;
-  if (gUserMinesCount === gLevel.MINES) {
-    gIsMineByUser = false;
-    return;
-  }
-
+  gIsUserPlay = true;
   var currCell = gBoard[i][j];
   currCell.isMine = true;
   elCell.classList.add("revealed");
@@ -62,4 +58,23 @@ function userMines(elCell, i, j) {
     elCell.innerText = EMPTY;
   }, 1000);
   gUserMinesCount++;
+  var elMinesLeft = document.querySelector(".user-mines-left");
+  elMinesLeft.innerText = `${gLevel.MINES - gUserMinesCount} Mines Left`;
+  if (gUserMinesCount === gLevel.MINES) {
+    elMinesLeft.innerText = "LETS START";
+    setTimeout(() => {
+      elMinesLeft.innerText = "";
+    }, 1000);
+    gIsMineByUser = false;
+    return;
+  }
+}
+
+function minesByUser() {
+  if (gUserMinesCount === gLevel.MINES) return;
+  if (gGame.shownCount || gGame.markedCount) return;
+  gIsMineByUser = true;
+  document.querySelector(".user-mines-left").innerText = `${
+    gLevel.MINES - gUserMinesCount
+  } Mines Left`;
 }
